@@ -22,8 +22,7 @@ class App extends Component {
   }
 
   fetchNewsList = async () => {
-    const topStories = await hackernews.getTopStories(5);
-
+    const topStories = await hackernews.getTopStories(this.state.activePage, 5);
     const newsLists = topStories.map(storyId => {
       return hackernews.getStoryItem(storyId);
     });
@@ -32,9 +31,10 @@ class App extends Component {
     this.setState({ newsItems: result });
   };
 
-  handleNavBarClick = (e, active) => {
+  handleNavBarClick = async (e, active) => {
     e.preventDefault();
-    this.setState({ activePage: active });
+    await this.setState({ activePage: active, newsItems: [] });
+    await this.fetchNewsList();
   };
 
   render() {

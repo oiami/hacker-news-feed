@@ -2,7 +2,7 @@ import * as hackernews from "../apis/hackernews";
 
 describe("Send request to HackerNews API", () => {
   it("should return list of top stotories", async () => {
-    const result = await hackernews.getTopStories(30);
+    const result = await hackernews.getTopStories("hackerNews", 30);
     expect(result).toHaveLength(30);
   });
 

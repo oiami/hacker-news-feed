@@ -6,10 +6,15 @@ const createRequest = () => {
   });
 };
 
-export const getTopStories = async limit => {
+const enpoints = {
+  hackerNews: "topstories",
+  newest: "newstories"
+};
+
+export const getTopStories = async (activePage, limit) => {
   try {
     const request = createRequest();
-    const { data } = await request.get("/topstories.json");
+    const { data } = await request.get(`/${enpoints[activePage]}.json`);
     return data.slice(0, limit);
   } catch (e) {
     console.log(e);
