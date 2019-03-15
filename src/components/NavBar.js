@@ -1,30 +1,32 @@
-import React, { Component } from "react";
+import React from "react";
 
-class NavBar extends Component {
-  render() {
+const navBar = {
+  hackerNews: "Hacker News",
+  newest: "New",
+  past: "Past",
+  comments: "Comments"
+};
+
+const NavBar = ({ active, onClick }) => {
+  const navBarList = Object.keys(navBar).map(key => {
     return (
-      <nav>
-        <div className="nav-wrapper">
-          <ul className="left hide-on-med-and-down">
-            <li className="active">
-              <a href="/">
-                <strong>Hacker News</strong>
-              </a>
-            </li>
-            <li>
-              <a href="">New</a>
-            </li>
-            <li>
-              <a href="">Past</a>
-            </li>
-            <li>
-              <a href="">Comments</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <li
+        onClick={e => onClick(e, key)}
+        key={key}
+        className={active === key ? "active" : ""}
+      >
+        <a href="#">{navBar[key]}</a>
+      </li>
     );
-  }
-}
+  });
+
+  return (
+    <nav>
+      <div className="nav-wrapper">
+        <ul className="left hide-on-med-and-down">{navBarList}</ul>
+      </div>
+    </nav>
+  );
+};
 
 export default NavBar;
