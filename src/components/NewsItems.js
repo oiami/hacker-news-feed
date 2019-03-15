@@ -31,7 +31,7 @@ export const NewsItem = props => {
   return props.items.map(data => {
     const item = transformData(data);
     return (
-      <li className="collection-item">
+      <li key={item.id} className="collection-item">
         <a href={item.url}>
           <h6>
             {item.title} ({item.relativeUrl})
