@@ -3,8 +3,7 @@ import React from "react";
 const navBar = {
   hackerNews: "Hacker News",
   newest: "New",
-  past: "Past",
-  comments: "Comments"
+  show: "Show"
 };
 
 const NavBar = ({ active, onClick }) => {

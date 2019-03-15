@@ -8,7 +8,8 @@ const createRequest = () => {
 
 const enpoints = {
   hackerNews: "topstories",
-  newest: "newstories"
+  newest: "newstories",
+  show: "showstories"
 };
 
 export const getTopStories = async (activePage, limit) => {
