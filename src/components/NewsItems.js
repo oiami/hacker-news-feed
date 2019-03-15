@@ -13,34 +13,34 @@ export const getDiffTime = postTime => {
   else return `${date.diff(postDate, "days")} days`;
 };
 
-export const transformData = item => {
-  const host = new URL(item.url).host;
-  const hostUrl = host
-    .split(".")
-    .slice(-2)
-    .join(".");
-
-  return {
-    ...item,
-    relativeUrl: hostUrl,
-    diffTime: getDiffTime(item.time)
-  };
+export const getRelativeUrl = url => {
+  try {
+    const host = new URL(url).host;
+    return host
+      .split(".")
+      .slice(-2)
+      .join(".");
+  } catch (e) {
+    return "";
+  }
 };
 
 export const NewsItem = props => {
-  return props.items.map(data => {
-    const item = transformData(data);
+  return props.items.map(item => {
+    const relativeUrl = getRelativeUrl(item.url);
+    const diffTime = getDiffTime(item.time);
+
     return (
       <li key={item.id} className="collection-item">
         <a href={item.url}>
           <h6>
-            {item.title} ({item.relativeUrl})
+            {item.title} {relativeUrl ? relativeUrl : ""}
           </h6>
         </a>
         <a href="" />
         <p>
-          {item.score} Points by {item.by} {item.diffTime} ago |{" "}
-          {item.descendants} comments
+          {item.score} Points by {item.by} {diffTime} ago | {item.descendants}{" "}
+          comments
         </p>
       </li>
     );
