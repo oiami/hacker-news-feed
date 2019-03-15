@@ -12,6 +12,8 @@ class App extends Component {
     super();
     this.state = {
       activePage: "hackerNews",
+      page: 1,
+      totalPages: 10,
       newsItems: []
     };
   }
@@ -25,7 +27,12 @@ class App extends Component {
 
   fetchNewsList = async () => {
     const topStories = await hackernews.getTopStories(this.state.activePage, 5);
-    const newsLists = topStories.map(storyId => {
+    await this.setState({ totalPages: Math.ceil(topStories.length / 30) });
+
+    const lastItem = this.state.page * 30;
+    const currentPageStories = topStories.slice(lastItem - 30, lastItem);
+
+    const newsLists = currentPageStories.map(storyId => {
       return hackernews.getStoryItem(storyId);
     });
 
@@ -39,6 +46,12 @@ class App extends Component {
     await this.fetchNewsList();
   };
 
+  handlePageClick = async (e, page) => {
+    e.preventDefault();
+    await this.setState({ page: page, newsItems: [] });
+    await this.fetchNewsList();
+  };
+
   render() {
     return (
       <div className="container">
@@ -47,7 +60,11 @@ class App extends Component {
           onClick={this.handleNavBarClick}
         />
         <NewsList newsItems={this.state.newsItems} />
-        <Pagination />
+        <Pagination
+          page={this.state.page}
+          totalPage={this.state.totalPages}
+          onClick={this.handlePageClick}
+        />
         <Footer />
       </div>
     );

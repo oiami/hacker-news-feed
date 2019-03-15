@@ -12,11 +12,11 @@ const enpoints = {
   show: "showstories"
 };
 
-export const getTopStories = async (activePage, limit) => {
+export const getTopStories = async activePage => {
   try {
     const request = createRequest();
     const { data } = await request.get(`/${enpoints[activePage]}.json`);
-    return data.slice(0, limit);
+    return data;
   } catch (e) {
     console.log(e);
     throw new Error(e.message);
