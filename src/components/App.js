@@ -4,6 +4,8 @@ import "materialize-css/dist/css/materialize.min.css";
 import NavBar from "./NavBar";
 import NewsList from "./NewsList";
 import * as hackernews from "../apis/hackernews";
+import Pagination from "./Pagination";
+import Footer from "./Footer";
 
 class App extends Component {
   constructor() {
@@ -45,6 +47,8 @@ class App extends Component {
           onClick={this.handleNavBarClick}
         />
         <NewsList newsItems={this.state.newsItems} />
+        <Pagination />
+        <Footer />
       </div>
     );
   }
