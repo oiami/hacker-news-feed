@@ -34,7 +34,7 @@ export const NewsItem = props => {
       <li key={item.id} className="collection-item">
         <a href={item.url}>
           <h6>
-            {item.title} {relativeUrl ? relativeUrl : ""}
+            {item.title} {relativeUrl ? "(" + relativeUrl + ")" : ""}
           </h6>
         </a>
         <a href="" />
