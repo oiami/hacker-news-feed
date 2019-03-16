@@ -1,15 +1,15 @@
 import axios from "axios";
 
-const createRequest = () => {
-  return axios.create({
-    baseURL: `https://hacker-news.firebaseio.com/v0`
-  });
-};
-
 const enpoints = {
   hackerNews: "topstories",
   newest: "newstories",
   show: "showstories"
+};
+
+const createRequest = () => {
+  return axios.create({
+    baseURL: `https://hacker-news.firebaseio.com/v0`
+  });
 };
 
 export const getTopStories = async activePage => {
@@ -18,7 +18,6 @@ export const getTopStories = async activePage => {
     const { data } = await request.get(`/${enpoints[activePage]}.json`);
     return data;
   } catch (e) {
-    console.log(e);
     throw new Error(e.message);
   }
 };

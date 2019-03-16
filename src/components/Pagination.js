@@ -1,7 +1,6 @@
 import React from "react";
 
 const Pagination = ({ page, totalPage, onClick }) => {
-  console.log(page, totalPage);
   let pages = [];
 
   for (let i = 1; i <= totalPage; i++) {
